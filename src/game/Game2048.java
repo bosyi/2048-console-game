@@ -89,23 +89,23 @@ public class Game2048 {
                 continue;
             }
             if (numbersInRow == 1) {
-                moveZeroRight(view[i]);
+                moveZeroRight(view[i],numbersInRow);
             } else if (numbersInRow == 2) {
-                moveZeroRight(view[i]);
+                moveZeroRight(view[i],numbersInRow);
                 joinDuplicates(view[i]);
             } else if (numbersInRow == sideSize) {
                 joinDuplicates(view[i]);
-                moveZeroRight(view[i]);
+                moveZeroRight(view[i],numbersInRow);
             } else {
-                moveZeroRight(view[i]);
+                moveZeroRight(view[i],numbersInRow);
                 joinDuplicates(view[i]);
-                moveZeroRight(view[i]);
+                moveZeroRight(view[i],numbersInRow);
             }
         }
     }
 
-    private void moveZeroRight(Cell2048[] array) {
-        int[] transformed = new int[countCellsWithValuesInRow(array)];
+    private void moveZeroRight(Cell2048[] array, int numberOfCellsWithNumbers) {
+        int[] transformed = new int[numberOfCellsWithNumbers];
         for (int i = 0, counter = 0; i < sideSize; i++) {
             if (array[i].value != 0) {
                 transformed[counter] = array[i].value;
