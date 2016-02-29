@@ -15,7 +15,7 @@ public class Game2048 {
     private Cell2048[][] vertTopView;
     private Cell2048[][] vertBottomView;
     private ArrayList<Cell2048> allCellsView;
-    private int[][] copyOfView;
+    private int[][] integerView;
 
     private Game2048(int sideSize) {
         this.sideSize = sideSize;
@@ -24,7 +24,7 @@ public class Game2048 {
         vertTopView = new Cell2048[sideSize][sideSize];
         vertBottomView = new Cell2048[sideSize][sideSize];
         allCellsView = new ArrayList<>(sideSize*sideSize);
-        copyOfView = new int[sideSize][sideSize];
+        integerView = new int[sideSize][sideSize];
         for (int i = 0; i < sideSize; i++) {
             for (int j = 0; j < sideSize; j++) {
                 Cell2048 cell = new Cell2048();
@@ -38,6 +38,7 @@ public class Game2048 {
         pushNewNumber();
         pushNewNumber();
         gameStatus = GameStatus.PLAYABLE;
+        copyView();
     }
 
     public static Game2048 getGame() {
@@ -45,8 +46,8 @@ public class Game2048 {
     }
 
     public static Game2048 getGame(int sideSize) {
-        if (sideSize < 3) {
-            throw new RuntimeException("Side size can be 3 or more");
+        if (sideSize < 2) {
+            throw new RuntimeException("Side size can be 2 or more");
         }
         return new Game2048(sideSize);
     }
@@ -71,12 +72,12 @@ public class Game2048 {
             case UP: view = vertTopView; break;
             case DOWN: view = vertBottomView; break;
         }
-        copyView();
         process(view);
         if (!ifViewChanged()) {
             return;
         }
         pushNewNumber();
+        copyView();
         if (!ifWeHaveFreeCells() && !ifWeHaveJoinableCells()) {
             gameStatus = GameStatus.FINISHED;
         }
@@ -171,7 +172,7 @@ public class Game2048 {
     private void copyView() {
         for (int i = 0; i < sideSize; i++) {
             for (int j = 0; j < sideSize; j++) {
-                copyOfView[i][j] = horzLeftView[i][j].value;
+                integerView[i][j] = horzLeftView[i][j].value;
             }
         }
     }
@@ -179,7 +180,7 @@ public class Game2048 {
     private boolean ifViewChanged() {
         for (int i = 0; i < sideSize; i++) {
             for (int j = 0; j < sideSize; j++) {
-                if (copyOfView[i][j] != horzLeftView[i][j].value) {
+                if (integerView[i][j] != horzLeftView[i][j].value) {
                     return true;
                 }
             }
@@ -193,6 +194,10 @@ public class Game2048 {
 
     public int getScore() {
         return score;
+    }
+
+    public int[][] getIntegerView() {
+        return integerView;
     }
 
     private static class Cell2048{
