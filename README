@@ -1,0 +1,10 @@
+This is small 2048 console game written in Java. Game can be configured to set side size starting from 2.
+Consist of Game2048 class which represents a state of game and methods to interact with it.
+Also include simple Main class to run game, prompt input from user, and send it to game.
+It easily can be extended with gui as provides such features, as:
+ * get game object using public static 'Game2048.getGame(): Game2048' or 'Game2048.getGame(sideSize: int): Game2048'
+ * play next move telling the game to which side you want to shift numbers using enum Direction 'swipe(Direction direction)',
+ * get score of game 'getScore(): int',
+ * get game status which represented as enum and can be PLAYABLE or FINISHED 'getGameStatus(): GameStatus',
+ * get view of board represented as matrix of integers 'getIntegerView(): int[][]',
+ * print view to System.out 'printGameView()'.
