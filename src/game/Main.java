@@ -18,19 +18,34 @@ public class Main {
     }
 
     private static Game2048.Direction getDirection() {
-        int value;
-        value = scanner.nextInt();
-        Game2048.Direction direction;
+        Game2048.Direction direction = null;
+        String line = scanner.nextLine();
+        int value = getLegalValue(line);
+        if (value == -1) {
+            System.out.println("Please enter number 4,8,6, or 2");
+            return getDirection();
+        }
         switch (value) {
             case 4: direction = Game2048.Direction.LEFT; break;
             case 8: direction = Game2048.Direction.UP; break;
             case 6: direction = Game2048.Direction.RIGHT; break;
             case 2: direction = Game2048.Direction.DOWN;break;
-            default: {
-                System.out.println("You need to choose only between 4,8,6,2 numbers");
-                return getDirection();
-            }
         }
         return direction;
+    }
+
+    private static int getLegalValue(String line) {
+        int value;
+        try {
+            value = Integer.parseInt(line);
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+        if (value == 4 || value == 8
+                || value == 6 || value == 2) {
+            return value;
+        } else {
+            return -1;
+        }
     }
 }

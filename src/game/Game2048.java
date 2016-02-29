@@ -9,7 +9,7 @@ public class Game2048 {
     private Random random = new Random();
     private GameStatus gameStatus;
     private int sideSize;
-    private int score = 0;
+    private int score;
     private Cell2048[][] horzLeftView;
     private Cell2048[][] horzRightView;
     private Cell2048[][] vertTopView;
@@ -126,7 +126,6 @@ public class Game2048 {
                 array[i].value = array[i].value * 2;
                 array[i + 1].value = 0;
                 score+=array[i].value;
-                array[i].joins++;
                 i++;
             }
         }
@@ -198,7 +197,6 @@ public class Game2048 {
 
     private static class Cell2048{
         int value;
-        int joins;
     }
 
 }
