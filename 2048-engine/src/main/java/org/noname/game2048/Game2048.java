@@ -1,4 +1,4 @@
-package game;
+package org.noname.game2048;
 
 import java.util.ArrayList;
 import java.util.Random;
