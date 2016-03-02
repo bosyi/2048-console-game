@@ -1,5 +1,8 @@
 package org.noname.game2048;
 
+import org.noname.game2048.engine.Game2048;
+import org.noname.game2048.engine.Game2048Factory;
+
 import java.util.Scanner;
 
 public class Main {
@@ -12,7 +15,7 @@ public class Main {
             System.out.println("You entered bad value");
             return;
         }
-        Game2048 game2048 = Game2048.getGame(sideSize);
+        Game2048 game2048 = Game2048Factory.getGame(sideSize, Game2048Factory.GameType.RPS);
         System.out.println("Score: " + game2048.getScore());
         game2048.printGameView();
 
